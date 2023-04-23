@@ -1,0 +1,15 @@
+type Cake {
+  name: String,
+  description: String,
+  price: Float,
+  weight: Float,
+  flavors: [String],
+  ingredients: [String],
+  image: String,
+  reviews: [Review],
+  delivery_info: [Delivery],
+  size: CakeSize,
+  occasion: String,
+  allergens: [String],
+  nutritional_info: Nutrition
+}

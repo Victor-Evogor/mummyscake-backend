@@ -1,0 +1,4 @@
+type Query {
+  getAllCakes(limit: Int): [Cake],
+  getCake(id: ID): Cake
+}

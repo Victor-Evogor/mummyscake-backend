@@ -1,0 +1,7 @@
+type Demo3 {
+    property: String
+}
+
+type Demo4 {
+    property: String
+}

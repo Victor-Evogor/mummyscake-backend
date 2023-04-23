@@ -1,0 +1,5 @@
+type CakeSize {
+  diameter: Float,
+  height: Float,
+  serving_size: Float
+}

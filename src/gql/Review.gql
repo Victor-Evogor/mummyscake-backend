@@ -1,0 +1,5 @@
+type Review {
+  user: String,
+  comment: String,
+  rating: Int
+}

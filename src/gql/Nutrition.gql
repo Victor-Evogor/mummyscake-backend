@@ -1,0 +1,6 @@
+type Nutrition {
+    calories: Int,
+    fat: Int,
+    sugar: Int,
+    protein: Int
+  }
