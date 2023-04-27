@@ -9,4 +9,7 @@ export const resolvers = {
     getCake: async (_: never, { id }: { id: string }) =>
       await Cake.findById(id),
   },
+  Cake : {
+    id: ({_id}:{_id: string})=> _id
+  }
 };

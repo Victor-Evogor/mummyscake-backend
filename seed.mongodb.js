@@ -93,7 +93,7 @@ db.cakes.insertMany([
       "eggs",
       "butter",
     ],
-    image: "https://example.com/lemon_blueberry_cake.jpg",
+    image: "lemon_blueberry_cake.jpg",
     rating: 4.6,
     reviews: [
       { user: "Amy", comment: "Perfect for a summer party!", rating: 5 },
@@ -177,7 +177,9 @@ db.cakes.insertMany([
   {
     name: "Vanilla Bean Cake",
     price: 22.99,
+    weight: 2.5,
     description: "A classic vanilla cake made with real vanilla beans.",
+    flavors: ["Vanilla"],
     ingredients: [
       "flour",
       "sugar",
@@ -195,9 +197,304 @@ db.cakes.insertMany([
       "vanilla extract",
       "salt",
     ],
-    image_url: "/vanilla_bean_cake.jpg",
-    ratings: [5, 4, 4.5, 5, 4.5],
+    image: "/vanilla_bean_cake.jpg",
+    rating: 4.8,
+    reviews: [
+      "This cake was amazing! The vanilla flavor really came through.",
+      "The cake was moist and delicious.",
+      "I would definitely order this cake again.",
+    ],
+    delivery_info: {
+      available: true,
+      shipping_cost: 7.99,
+      estimated_delivery_time: "2-3 business days",
+    },
+    size: {
+      diameter: 9,
+      height: 2,
+      serving_size: 8,
+    },
+    occasion: "Birthday",
+    allergens: ["Wheat", "Eggs", "Milk"],
+    nutritional_info: {
+      calories: 320,
+      fat: 14,
+      sugar: 22,
+      protein: 4,
+    },
   },
+  {
+    name: "Vanilla Sponge Cake",
+    description: "Light and fluffy vanilla cake",
+    price: 29.99,
+    weight: 2.0,
+    flavors: ["Vanilla"],
+    ingredients: ["Flour", "Sugar", "Eggs", "Vanilla Extract"],
+    image: "vanilla_sponge_cake.png",
+    reviews: [
+      {
+        user: "Alice",
+        comment:
+          "This cake is so light and fluffy, just like the name suggests. The vanilla flavor is spot on and the texture is perfect. Highly recommend!",
+        rating: 5,
+      },
+      {
+        user: "Bob",
+        comment:
+          "I'm not usually a fan of vanilla cakes, but this one surprised me. It's not too sweet and the texture is just right. Perfect with a cup of tea.",
+        rating: 4,
+      },
+    ],
+    delivery_info: [
+      {
+        method: "Standard Shipping",
+        cost: 5.99,
+        estimated_delivery: "2022-05-01T12:00:00Z",
+      },
+      {
+        method: "Express Shipping",
+        cost: 12.99,
+        estimated_delivery: "2022-04-30T14:00:00Z",
+      },
+    ],
+    size: {
+      diameter: 9,
+      height: 3,
+      serving_size: 12
+      },
+    occasion: "Afternoon tea",
+    allergens: ["Gluten", "Eggs"],
+    nutritional_info: {
+      calories: 250,
+      fat: 10,
+      protein: 3,
+      carbs: 35,
+    },
+  },
+  {
+    name: "Strawberry Shortcake",
+    description: "Layers of vanilla sponge cake and fresh strawberries",
+    price: 39.99,
+    weight: 2.5,
+    flavors: ["Vanilla", "Strawberry"],
+    ingredients: ["Flour", "Sugar", "Eggs", "Vanilla Extract", "Strawberries"],
+    image: "strawberry_shortcake.png",
+    reviews: [
+      {
+        user: "Charlie",
+        comment:
+          "This cake is so pretty and tastes just as good as it looks! The vanilla cake is moist and the fresh strawberries are so juicy. Perfect for a summer party.",
+        rating: 5,
+      },
+      {
+        user: "Eve",
+        comment:
+          "The cake was good, but I wish there were more strawberries in it. I felt like I was mostly eating the cake. Still, it was tasty and everyone at the party enjoyed it.",
+        rating: 3,
+      },
+    ],
+    delivery_info: [
+      {
+        method: "Standard Shipping",
+        cost: 5.99,
+        estimated_delivery: "2022-05-05T18:00:00Z",
+      },
+      {
+        method: "Express Shipping",
+        cost: 12.99,
+        estimated_delivery: "2022-05-04T14:00:00Z",
+      },
+    ],
+    size: {
+      diameter: 9,
+      height: 3,
+      serving_size: 12
+      },
+    occasion: "Summer party",
+    allergens: ["Gluten", "Eggs"],
+    nutritional_info: {
+      calories: 300,
+      fat: 15,
+      protein: 4,
+      carbs: 40,
+    },
+  },
+  {
+    name: "Pineapple Upside-Down Cake",
+    description:
+      "Classic cake with caramelized pineapple and maraschino cherries",
+    price: 34.99,
+    weight: 2.0,
+    flavors: ["Pineapple", "Cherry"],
+    ingredients: ["Flour", "Sugar", "Eggs", "Pineapple", "Maraschino Cherries"],
+    image: "https://example.com/pineapple-upside-down-cake.jpg",
+    reviews: [
+      {
+        user: "Grace",
+        comment:
+          "This cake brings back so many childhood memories! The pineapple and cherry topping is so sweet and delicious. The cake itself is moist and flavorful. Would order again.",
+        rating: 4,
+      },
+      {
+        user: "Henry",
+        comment:
+          "I'm not a big fan of pineapple, but I had to try this cake because it looked so good. I was pleasantly surprised by how much I enjoyed it! The cake is not too sweet, and the pineapple and cherry topping is a nice contrast. Definitely recommend.",
+        rating: 4,
+      },
+    ],
+    delivery_info: [
+      {
+        method: "Standard Shipping",
+        cost: 5.99,
+        estimated_delivery: "2022-05-02T12:00:00Z",
+      },
+      {
+        method: "Express Shipping",
+        cost: 12.99,
+        estimated_delivery: "2022-05-01T14:00:00Z",
+      },
+    ],
+    size: {
+      diameter: 9,
+      height: 3,
+      serving_size: 12
+      },
+    occasion: "Dessert",
+    allergens: ["Gluten", "Eggs"],
+    nutritional_info: {
+      calories: 280,
+      fat: 12,
+      protein: 3,
+      carbs: 40,
+    },
+  },
+  {
+    name: "Blueberry Cheesecake",
+    description: "Rich and creamy cheesecake with a blueberry topping",
+    price: 49.99,
+    weight: 3.5,
+    flavors: ["Cheesecake", "Blueberry"],
+    ingredients: ["Graham Cracker Crumbs", "Cream Cheese", "Sugar", "Eggs", "Sour Cream", "Blueberries"],
+    image: "https://example.com/blueberry-cheesecake.jpg",
+    rating: 4.5,
+    reviews: [
+    "This cake was absolutely amazing! The cheesecake was so creamy, and the blueberry topping was the perfect balance of sweet and tart.",
+    "I ordered this for a party, and it was a hit! Everyone loved the blueberry cheesecake. It was so rich and flavorful.",
+    "The cheesecake was delicious, but I wish there were more blueberries on top. Overall, I would order this again."
+    ],
+    delivery_info: {
+    available: true,
+    shipping_cost: 9.99,
+    estimated_delivery_time: "2022-05-05T12:00:00Z"
+    },
+    size: {
+    diameter: 9,
+    height: 3,
+    serving_size: 12
+    },
+    occasion: "Party",
+    allergens: ["Gluten", "Eggs", "Dairy"],
+    nutritional_info: {
+    calories: 400,
+    fat: 20,
+    sugar: 30,
+    protein: 8
+    }
+    }
+    ,
+    {
+    name: "Pumpkin Spice Cake",
+    description: "Spiced cake with pumpkin puree and cream cheese frosting",
+    price: 34.99,
+    weight: 2.5,
+    flavors: ["Pumpkin Spice"],
+    ingredients: ["Flour", "Sugar", "Eggs", "Pumpkin Puree", "Cinnamon", "Nutmeg", "Cloves", "Cream Cheese"],
+    image: "https://example.com/pumpkin-spice-cake.jpg",
+    rating: 4.2,
+    reviews: [
+    "I loved this cake! The pumpkin spice flavor was just right, and the cream cheese frosting was a perfect match.",
+    "This cake was good, but I felt like the spice was a little too strong. It overpowered the pumpkin flavor a bit.",
+    "The frosting was amazing, but the cake itself was a bit dry. I wish it had been more moist.",
+    "Overall, I would recommend this cake. It's perfect for fall and winter events."
+    ],
+    delivery_info: {
+    available: true,
+    shipping_cost: 7.99,
+    estimated_delivery_time: "2022-05-04T12:00:00Z"
+    },
+    size: {
+    diameter: 8,
+    height: 4,
+    serving_size: 10
+    },
+    occasion: "Fall",
+    allergens: ["Gluten", "Eggs", "Dairy"],
+    nutritional_info: {
+    calories: 350,
+    fat: 15,
+    sugar: 25,
+    protein: 5
+    }
+    },
+    {
+      name: "Choco-Hazelnut Cake",
+      description: "Decadent chocolate cake with a hazelnut twist",
+      price: 49.99,
+      weight: 3.0,
+      flavors: ["Chocolate", "Hazelnut"],
+      ingredients: ["Flour", "Sugar", "Eggs", "Chocolate", "Hazelnuts"],
+      image: "https://example.com/choco-hazelnut-cake.jpg",
+      rating: 4.5,
+      reviews: ["Excellent cake, loved the combination of chocolate and hazelnut!", "Best chocolate cake ever!"],
+      delivery_info: {
+        available: true,
+        shipping_cost: 7.99,
+        estimated_delivery_time: "2022-05-10T14:00:00Z"
+      },
+      size: {
+        diameter: 10,
+        height: 3,
+        serving_size: 12
+      },
+      occasion: "Birthday",
+      allergens: ["Gluten", "Eggs", "Nuts"],
+      nutritional_info: {
+        calories: 350,
+        fat: 18,
+        sugar: 30,
+        protein: 6
+      }
+    },
+    {
+      name: "Mango Mousse Cake",
+      description: "Light and fluffy mango mousse cake",
+      price: 34.99,
+      weight: 2.5,
+      flavors: ["Mango"],
+      ingredients: ["Flour", "Sugar", "Eggs", "Mango Puree"],
+      image: "https://example.com/mango-mousse-cake.jpg",
+      rating: 4,
+      reviews: ["I loved the light and fluffy texture of this cake, and the mango flavor was spot on!", "A great option for a summer dessert!"],
+      delivery_info: {
+        available: true,
+        shipping_cost: 5.99,
+        estimated_delivery_time: "2022-05-08T10:00:00Z"
+      },
+      size: {
+        diameter: 8,
+        height: 2.5,
+        serving_size: 8
+      },
+      occasion: "Summer dessert",
+      allergens: ["Gluten", "Eggs"],
+      nutritional_info: {
+        calories: 200,
+        fat: 8,
+        sugar: 20,
+        protein: 3
+      }
+    }
+
 ]);
 
 console.log("All records inserted");
