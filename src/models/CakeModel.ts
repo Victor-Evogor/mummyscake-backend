@@ -30,23 +30,7 @@ const CakeSchema = new Schema({
     type: String,
     default: null
   },
-  reviews: {
-    type: [{
-      user: {
-        type: String,
-        required: true
-      },
-      comment: {
-        type: String,
-        required: true
-      },
-      rating: {
-        type: Number,
-        required: true
-      },
-    }],
-    default: []
-  },
+
   delivery_info: {
     type: {
       available: {
@@ -56,7 +40,7 @@ const CakeSchema = new Schema({
         type: Number,
       },
       estimated_delivery_time: {
-        type: Number
+        type: String
       }
     }
   },
@@ -74,7 +58,15 @@ const CakeSchema = new Schema({
     fat: Number,
     sugar: Number,
     protein: Number
-  }
+  },
+  rating: {
+    type: Number
+  },
+  reviews: [{
+    user: String,
+  comment: String,
+  rating: Number
+  }]
 })
 
-export const Cake = model("cake", CakeSchema)
+export const CakeModel = model("cake", CakeSchema)

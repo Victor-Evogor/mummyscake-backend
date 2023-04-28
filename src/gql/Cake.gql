@@ -8,9 +8,10 @@ type Cake {
   ingredients: [String],
   image: String,
   reviews: [Review],
-  delivery_info: [Delivery],
+  delivery_info: Delivery,
   size: CakeSize,
   occasion: String,
   allergens: [String],
-  nutritional_info: Nutrition
+  nutritional_info: Nutrition,
+  rating: Float!
 }
