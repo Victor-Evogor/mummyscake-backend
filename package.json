@@ -27,6 +27,7 @@
     "dev": "nodemon --exec ts-node --require tsconfig-paths/register src/index.ts",
     "seed:local": "DB_URI='mongodb://localhost:27017/mummyscake' mongosh seed.mongodb.js",
     "build": "tsc -p .",
-    "seed:global": "node seed.remote.mongodb.js"
+    "seed:global": "node seed.remote.mongodb.js",
+    "start": "ts-node --require tsconfig-paths/register src/index.ts"
   }
 }
