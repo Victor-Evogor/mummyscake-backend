@@ -9,5 +9,17 @@ export const resolvers = {
   },
   Cake: {
     id: ({ _id }: { _id: string }) => _id,
+    rating: ({reviews, rating}:{reviews: {
+      user: string,
+      rating: number,
+      comment: string
+    }[], rating: number | null})=>{
+      if(!rating){
+        return reviews.reduce((acc, review)=>{
+          return acc + review.rating
+        }, 0)/ reviews.length
+      }
+      return rating
+    }
   },
 };

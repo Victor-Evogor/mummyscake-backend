@@ -9,7 +9,7 @@ import { green, yellow } from "colors";
 import cors from "cors";
 config();
 
-connect(process.env.DB_URL!).then(() =>
+connect(process.env.DB_URI!).then(() =>
   console.log(green("Connected to database successfully!"))
 );
 

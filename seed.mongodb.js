@@ -1,4 +1,4 @@
-db = connect("mongodb://localhost:27017/mummyscake");
+db = connect(process.env.DB_URI);
 
 db.cakes.deleteMany({});
 
