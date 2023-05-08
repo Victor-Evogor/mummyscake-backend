@@ -1,3 +1,4 @@
+import { removeElementAtIndex } from "@utils/removeElementAtIndex";
 import { CakeModel } from "./models/CakeModel";
 
 export const resolvers = {
@@ -30,13 +31,32 @@ export const resolvers = {
     },
   },
   Mutation: {
-    favoriteCake: async (_: never, { id, userId }: { id: string, userId: string })=>{
+    favoriteCake: async (
+      _: never,
+      { id, userId }: { id: string; userId: string }
+    ) => {
       await CakeModel.findByIdAndUpdate(id, {
         $push: {
-          favorites: userId
-        }
+          favorites: userId,
+        },
       });
       return await CakeModel.findById(id);
-    }
-  }
+    },
+    unFavoriteCake: async (
+      _: never,
+      { id, userId }: { id: string; userId: string }
+    ) => {
+      const cake = await CakeModel.findById(id);
+      if (!cake) {
+        return new Error("Cake id not found");
+      }
+      const index = cake.favorites.indexOf(userId);
+      if (index < 0) return new Error("User not found among favorites");
+      const newFavorites = removeElementAtIndex(cake.favorites, index);
+      await CakeModel.findByIdAndUpdate(id, {
+        favorites: newFavorites,
+      });
+      return await CakeModel.findById(id);
+    },
+  },
 };
