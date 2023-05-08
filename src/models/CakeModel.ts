@@ -66,7 +66,11 @@ const CakeSchema = new Schema({
     user: String,
   comment: String,
   rating: Number
-  }]
+  }],
+  favorites: {
+    type: [String],
+    default: []
+  }
 })
 
 export const CakeModel = model("cake", CakeSchema)

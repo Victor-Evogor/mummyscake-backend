@@ -1,0 +1,12 @@
+type Order {
+    id: ID
+    value: Float
+    items: [Cake]
+    status: Status
+    owner: ID
+}
+
+enum Status {
+  pending
+  completed
+}

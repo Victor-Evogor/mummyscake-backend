@@ -9,17 +9,34 @@ export const resolvers = {
   },
   Cake: {
     id: ({ _id }: { _id: string }) => _id,
-    rating: ({reviews, rating}:{reviews: {
-      user: string,
-      rating: number,
-      comment: string
-    }[], rating: number | null})=>{
-      if(!rating){
-        return reviews.reduce((acc, review)=>{
-          return acc + review.rating
-        }, 0)/ reviews.length
-      }
-      return rating
-    }
+    rating: ({
+      reviews,
+      rating,
+    }: {
+      reviews: {
+        user: string;
+        rating: number;
+        comment: string;
+      }[];
+      rating: number | null;
+    }) => {
+      if (reviews.length === 0) return rating;
+
+      return (
+        reviews.reduce((acc, review) => {
+          return acc + review.rating;
+        }, 0) / reviews.length
+      );
+    },
   },
+  Mutation: {
+    favoriteCake: async (_: never, { id, userId }: { id: string, userId: string })=>{
+      await CakeModel.findByIdAndUpdate(id, {
+        $push: {
+          favorites: userId
+        }
+      });
+      return await CakeModel.findById(id);
+    }
+  }
 };

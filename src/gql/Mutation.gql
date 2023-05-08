@@ -1,0 +1,3 @@
+type Mutation {
+  favoriteCake(id: ID, userId: String): Cake
+}
