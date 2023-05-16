@@ -1,5 +1,6 @@
 import { removeElementAtIndex } from "@utils/removeElementAtIndex";
 import { CakeModel } from "./models/CakeModel";
+import { UserModel } from "./models/UserModel";
 
 export const resolvers = {
   Query: {
@@ -8,6 +9,7 @@ export const resolvers = {
     getCake: async (_: never, { id }: { id: string }) =>
       await CakeModel.findById(id),
   },
+
   Cake: {
     id: ({ _id }: { _id: string }) => _id,
     rating: ({
@@ -30,6 +32,7 @@ export const resolvers = {
       );
     },
   },
+
   Mutation: {
     favoriteCake: async (
       _: never,
@@ -42,6 +45,7 @@ export const resolvers = {
       });
       return await CakeModel.findById(id);
     },
+
     unFavoriteCake: async (
       _: never,
       { id, userId }: { id: string; userId: string }
@@ -58,5 +62,53 @@ export const resolvers = {
       });
       return await CakeModel.findById(id);
     },
+
+    createUser: async (_: never, { userId }: { userId: string }) => {
+      const existingUser = await UserModel.findOne({
+        uid: userId,
+      });
+      if (existingUser) return existingUser;
+      await UserModel.create({
+        uid: userId,
+        cart:[],
+        orders: [],
+      });
+
+      return await UserModel.findOne({
+        uid: userId,
+      });
+    },
+
+    addToCart: async (_:never, {userId, cakeId}: {userId: string, cakeId: string}) => {
+      await UserModel.findOneAndUpdate({
+        uid: userId,
+      }, {
+        $push: {
+          cart: cakeId
+        }
+      });
+
+      return await UserModel.findOne({
+        uid: userId
+      });
+    },
+  },
+
+  User: {
+    cart: async ({cart}: {cart: string[]}) => {
+      const cakes = await Promise.all(cart.map(async cakeId => {
+        return await CakeModel.findById(cakeId);
+      }))
+
+      const value = cakes.reduce((prev, cake) => {
+        if(!cake) return prev;
+        return prev + cake.price
+      }, 0)
+
+      return {
+        value,
+        items: cakes?cakes:[]
+      }
+    }
   },
 };

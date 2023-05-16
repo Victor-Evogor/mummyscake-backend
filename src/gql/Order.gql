@@ -3,7 +3,6 @@ type Order {
     value: Float
     items: [Cake]
     status: Status
-    owner: ID
 }
 
 enum Status {

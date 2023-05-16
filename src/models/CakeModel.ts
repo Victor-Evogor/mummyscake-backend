@@ -1,6 +1,6 @@
 import {model, Schema} from "mongoose";
 
-const CakeSchema = new Schema({
+export const CakeSchema = new Schema({
   name: {
     type: String,
     required: true,

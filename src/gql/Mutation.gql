@@ -1,4 +1,6 @@
 type Mutation {
   favoriteCake(id: ID, userId: String): Cake
   unFavoriteCake(id: ID, userId: String): Cake
+  createUser(userId: ID): User
+  addToCart(userId: ID, cakeId: ID): User
 }

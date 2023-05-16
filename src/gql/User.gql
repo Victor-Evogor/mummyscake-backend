@@ -1,0 +1,5 @@
+type User {
+    uid: String,
+    cart: Cart,
+    orders: [Order]
+}
