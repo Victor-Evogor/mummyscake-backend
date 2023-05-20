@@ -92,6 +92,24 @@ export const resolvers = {
         uid: userId
       });
     },
+
+    removeFromCart: async (_:never, {userId, cakeId}: {userId: string, cakeId: string}) => {
+      const user = await UserModel.findOne({
+        uid: userId
+      });
+
+      if(!user) return new Error("User not found");
+
+      await UserModel.findOneAndUpdate({
+        uid: userId
+      }, {
+        cart: removeElementAtIndex(user.cart, user.cart.indexOf(cakeId))
+      });
+
+      return await UserModel.findOne({
+        uid: userId
+      });
+    }
   },
 
   User: {
@@ -111,4 +129,5 @@ export const resolvers = {
       }
     }
   },
+  // TODO: resolver that calculates the quantity of a cake ordered
 };

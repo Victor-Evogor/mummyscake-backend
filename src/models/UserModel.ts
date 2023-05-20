@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose";
-import { CakeSchema } from "./CakeModel";
 
 
 export const UserSchema = new Schema({
