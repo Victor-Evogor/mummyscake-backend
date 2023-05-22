@@ -6,7 +6,6 @@ import { config } from "dotenv";
 import express from "express";
 import { connect } from "mongoose";
 import { green, yellow } from "colors";
-import {join} from "path"
 import cors from "cors";
 config();
 
@@ -20,8 +19,6 @@ const server = new ApolloServer({
   typeDefs: getTypeDefs(),
   resolvers,
 });
-
-app.use("/",express.static(join(__dirname, "..", "client")))
 
 server.start().then(() => {
   app.use(
