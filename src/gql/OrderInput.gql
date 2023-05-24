@@ -1,0 +1,11 @@
+input OrderInput {
+  value: Float
+  items: [CakeInput]
+}
+
+input CakeInput{
+  id: ID,
+  name: String,
+  quantity: Int,
+  price: Float
+}

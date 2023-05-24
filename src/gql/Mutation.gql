@@ -4,4 +4,5 @@ type Mutation {
   createUser(userId: ID): User
   addToCart(userId: ID, cakeId: ID): User
   removeFromCart(userId: ID, cakeId: ID): User
+  createOrder(userId: ID, input: OrderInput): Order
 }

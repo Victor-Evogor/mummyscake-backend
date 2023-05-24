@@ -1,6 +1,7 @@
 import { removeElementAtIndex } from "@utils/removeElementAtIndex";
 import { CakeModel } from "./models/CakeModel";
 import { UserModel } from "./models/UserModel";
+import { OrderModel } from "./models/OrderModel";
 
 export const resolvers = {
   Query: {
@@ -109,6 +110,33 @@ export const resolvers = {
       return await UserModel.findOne({
         uid: userId
       });
+    },
+
+    createOrder: async (_: never, {userId, input}: {userId: string, input: {
+      value: number,
+      items: {
+        id: string,
+        name: string,
+        quantity: number,
+        price: number
+      }[]
+    }})=>{
+       const order = await OrderModel.create({
+        value: input.value,
+        items: input.items.map(({id})=> id),
+        uid: userId,
+        status: "pending"
+       });
+
+       await UserModel.findOneAndUpdate({
+        uid: userId
+       },{
+        $push: {
+          orders: order.id
+        }
+       });
+
+       return order
     }
   },
 
@@ -129,5 +157,13 @@ export const resolvers = {
       }
     }
   },
+
+  Order: {
+    items: async ({items}:{items: string[]}) => {
+      return await Promise.all(items.map(async cakeId => {
+        return await CakeModel.findById(cakeId);
+      }));
+    }
+  }
   // TODO: resolver that calculates the quantity of a cake ordered
 };
