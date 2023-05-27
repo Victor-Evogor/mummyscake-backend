@@ -71,7 +71,7 @@ export const resolvers = {
       if (existingUser) return existingUser;
       await UserModel.create({
         uid: userId,
-        cart:[],
+        cart: [],
         orders: [],
       });
 
@@ -80,90 +80,141 @@ export const resolvers = {
       });
     },
 
-    addToCart: async (_:never, {userId, cakeId}: {userId: string, cakeId: string}) => {
-      await UserModel.findOneAndUpdate({
-        uid: userId,
-      }, {
-        $push: {
-          cart: cakeId
+    addToCart: async (
+      _: never,
+      { userId, cakeId }: { userId: string; cakeId: string }
+    ) => {
+      await UserModel.findOneAndUpdate(
+        {
+          uid: userId,
+        },
+        {
+          $push: {
+            cart: cakeId,
+          },
         }
-      });
+      );
 
       return await UserModel.findOne({
-        uid: userId
+        uid: userId,
       });
     },
 
-    removeFromCart: async (_:never, {userId, cakeId}: {userId: string, cakeId: string}) => {
+    removeFromCart: async (
+      _: never,
+      { userId, cakeId }: { userId: string; cakeId: string }
+    ) => {
       const user = await UserModel.findOne({
-        uid: userId
+        uid: userId,
       });
 
-      if(!user) return new Error("User not found");
+      if (!user) return new Error("User not found");
 
-      await UserModel.findOneAndUpdate({
-        uid: userId
-      }, {
-        cart: removeElementAtIndex(user.cart, user.cart.indexOf(cakeId))
-      });
+      await UserModel.findOneAndUpdate(
+        {
+          uid: userId,
+        },
+        {
+          cart: removeElementAtIndex(user.cart, user.cart.indexOf(cakeId)),
+        }
+      );
 
       return await UserModel.findOne({
-        uid: userId
+        uid: userId,
       });
     },
 
-    createOrder: async (_: never, {userId, input}: {userId: string, input: {
-      value: number,
-      items: {
-        id: string,
-        name: string,
-        quantity: number,
-        price: number
-      }[]
-    }})=>{
-       const order = await OrderModel.create({
+    createOrder: async (
+      _: never,
+      {
+        userId,
+        input,
+      }: {
+        userId: string;
+        input: {
+          value: number;
+          items: {
+            id: string;
+            name: string;
+            quantity: number;
+            price: number;
+          }[];
+        };
+      }
+    ) => {
+      const order = await OrderModel.create({
         value: input.value,
-        items: input.items.map(({id})=> id),
+        items: input.items.map(({ id }) => id),
         uid: userId,
-        status: "pending"
-       });
+        status: "pending",
+      });
 
-       await UserModel.findOneAndUpdate({
-        uid: userId
-       },{
-        $push: {
-          orders: order.id
+      await UserModel.findOneAndUpdate(
+        {
+          uid: userId,
+        },
+        {
+          $push: {
+            orders: order.id,
+          },
         }
-       });
+      );
 
-       return order
+      return order;
+    },
+
+    getOrders: async (_: never, { userId }: { userId: string }) => {
+      return await OrderModel.find({
+        uid: userId,
+      });
+    },
+
+    emptyCart: async (_: never, {userId}:{userId: string}) => {
+      await UserModel.findOneAndUpdate({
+        uid: userId
+      }, {
+        cart: []
+      });
+
+      return await UserModel.findOne({uid: userId});
     }
   },
 
   User: {
-    cart: async ({cart}: {cart: string[]}) => {
-      const cakes = await Promise.all(cart.map(async cakeId => {
-        return await CakeModel.findById(cakeId);
-      }))
+    cart: async ({ cart }: { cart: string[] }) => {
+      const cakes = await Promise.all(
+        cart.map(async (cakeId) => {
+          return await CakeModel.findById(cakeId);
+        })
+      );
 
       const value = cakes.reduce((prev, cake) => {
-        if(!cake) return prev;
-        return prev + cake.price
-      }, 0)
+        if (!cake) return prev;
+        return prev + cake.price;
+      }, 0);
 
       return {
         value,
-        items: cakes?cakes:[]
-      }
-    }
+        items: cakes ? cakes : [],
+      };
+    },
+
+    orders: async ({ orders }: { orders: string[] }) =>
+      await Promise.all(
+        orders.map(async (orderId) => {
+          return await OrderModel.findById(orderId);
+        })
+      ),
   },
 
   Order: {
-    items: async ({items}:{items: string[]}) => {
-      return await Promise.all(items.map(async cakeId => {
-        return await CakeModel.findById(cakeId);
-      }));
-    }
-  }
+    items: async ({ items }: { items: string[] }) =>
+      await Promise.all(
+        items.map(async (orderId) => {
+          return await CakeModel.findById(orderId);
+        })
+      ),
+  },
+
   // TODO: resolver that calculates the quantity of a cake ordered
 };

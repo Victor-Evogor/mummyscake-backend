@@ -5,4 +5,6 @@ type Mutation {
   addToCart(userId: ID, cakeId: ID): User
   removeFromCart(userId: ID, cakeId: ID): User
   createOrder(userId: ID, input: OrderInput): Order
+  getOrders(userId: ID): [Order]
+  emptyCart(userId: ID): User
 }
