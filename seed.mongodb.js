@@ -17,7 +17,7 @@ db.cakes.insertMany([
       "eggs",
       "butter",
     ],
-    image: "/velvet_red_cake.jpg",
+    image: "velvet_red_cake.jpg",
     rating: 4.5,
     reviews: [
       { user: "John", comment: "Delicious cake!", rating: 5 },
@@ -50,7 +50,7 @@ db.cakes.insertMany([
     weight: 3,
     flavors: ["chocolate"],
     ingredients: ["flour", "sugar", "cocoa powder", "eggs", "butter"],
-    image: "/chocolate_fudge_cake.jpg",
+    image: "chocolate_fudge_cake.jpg",
     rating: 4.8,
     reviews: [
       {
@@ -144,7 +144,7 @@ db.cakes.insertMany([
       "cream cheese",
       "powdered sugar",
     ],
-    image: "/carrot_cake.jpg",
+    image: "carrot_cake.jpg",
     rating: 4.7,
     reviews: [
       {
@@ -201,7 +201,7 @@ db.cakes.insertMany([
       "vanilla extract",
       "salt",
     ],
-    image: "/vanilla_bean_cake.jpg",
+    image: "vanilla_bean_cake.jpg",
     rating: 4.8,
     reviews: [
       {

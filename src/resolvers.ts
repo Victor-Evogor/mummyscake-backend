@@ -147,6 +147,7 @@ export const resolvers = {
         items: input.items.map(({ id }) => id),
         uid: userId,
         status: "pending",
+        createdAt: (new Date()).toDateString()
       });
 
       await UserModel.findOneAndUpdate(
